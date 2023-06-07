@@ -6,9 +6,7 @@ import { PedagogicalPanel } from './panels/PedagogicalPanel';
 class PedagogicalDebugAdapterTrackerFactory implements vscode.DebugAdapterTrackerFactory {
 	createDebugAdapterTracker(session: vscode.DebugSession): vscode.ProviderResult<vscode.DebugAdapterTracker> {
 		return {
-			onDidSendMessage: message => {
-				vscode.window.showInformationMessage(`Reported message type: ${message.type} (${typeof message})`);
-			},
+			onDidSendMessage: message => PedagogicalPanel.appendMessage(message),
 			onWillReceiveMessage: message => { },
 			onWillStartSession: () => { },
 			onWillStopSession: () => { },
@@ -29,7 +27,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.debug.registerDebugAdapterTrackerFactory('*', debugAdapterTracker),
 		vscode.commands.registerCommand("vscode-debug-attacher-extension-test.showView", () => {
-			PedagogicalPanel.render();
+			PedagogicalPanel.render(context.extensionUri);
 		}),
 	);
 
