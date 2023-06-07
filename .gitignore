@@ -3,3 +3,11 @@ dist
 node_modules
 .vscode-test-web/
 *.vsix
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
